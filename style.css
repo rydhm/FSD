@@ -23,6 +23,7 @@
     height: 5vw;
     background: #000;
     padding: 0vw;
+    text-align:center;
   }
   body .card #header h1 {
     color: #fff;
