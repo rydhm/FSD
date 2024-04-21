@@ -1,0 +1,46 @@
+const { MongoClient } = require("mongodb");
+
+// Replace the uri string with your connection string.
+const uri =
+  "mongodb://localhost:27017/";
+
+const client = new MongoClient(uri);
+
+async function run() {
+  try {
+    await client.connect();
+
+    const database = client.db('University');
+    const students = database.collection('Students');
+    //    const query=[{
+    //     "prodId":20210,
+    //     "price":1000020,
+    //     "quantity":2220
+    // },{
+    //     "prodId":22300,
+    //     "price":13200000,
+    //     "quantity":220
+    // },];
+    // const student=await students.insertMany(query);
+   const query={"prodId":100};
+   const student=await students.deleteOne(query);
+   console.log(student.deletedCount);
+    // const query={
+    //     "prodId":200,
+    //     "price":100000,
+    //     "quantity":20
+    // };
+    // const student=await students.insertOne(query);
+    // console.log(
+    //     `A document was inserted with the _id: ${student.insertedId}`,
+    //  );
+    // const query = { "prodId": 100 };
+    // const student = await students.findOne(query);
+
+    console.log(students);
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
